@@ -2,7 +2,7 @@ name = "Simy"
 grammar = "simy"
 path_suffixes = ["simy"]
 line_comments = ["// "]
-tab_size = "4"
+tab_size = 4
 autoclose_before = ";:.,=}])"
 brackets = [
     { start = "(", end = ")", close = true, newline = true },
