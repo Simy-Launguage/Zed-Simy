@@ -64,7 +64,7 @@ rev = "bcc6d90a54f83b727d8f60aa5158e4192a642e59"
 | :--- | :--- |
 | **[simy](https://github.com/Neutriny/simy)** | 编译器与 CLI |
 | **[tree-sitter-simy](https://github.com/Neutriny/tree-sitter-simy)** | Tree-sitter 语法 |
-| **[docs/syntax.md](docs/syntax.md)** | 语言参考 |
+| **[docs/syntax.zh-CN.md](docs/syntax.zh-CN.md)** | 语言参考 |
 
 ## 发布
 
