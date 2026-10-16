@@ -1,0 +1,33 @@
+{
+  "languages": {
+    "Slint": {
+      "tab_size": 4,
+      "formatter": "language_server",
+      "language_servers": ["slint-lsp"],
+      "format_on_save": "on",
+    },
+    "Rust": {
+      "tab_size": 4,
+      "formatter": {
+        "external": {
+          "command": "cargo",
+          "arguments": ["check"],
+        },
+      },
+      "format_on_save": "on",
+    },
+  },
+  "tab_size": 2,
+  "colorize_brackets": false,
+  "inlay_hints": {
+    "show_background": true,
+    "enabled": true,
+  },
+  "show_whitespaces": "selection",
+  "line_ending": "enforce_lf",
+  "format_on_save": "on",
+  "indent_guides": {
+    "background_coloring": "disabled",
+    "coloring": "indent_aware",
+  },
+}

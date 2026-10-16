@@ -1,0 +1,16 @@
+name = "Simy"
+grammar = "simy"
+path_suffixes = ["simy"]
+line_comments = ["// "]
+tab_size = "4"
+autoclose_before = ";:.,=}])"
+brackets = [
+    { start = "(", end = ")", close = true, newline = true },
+    { start = "[", end = "]", close = true, newline = true },
+    { start = "{", end = "}", close = true, newline = true },
+    { start = "\"", end = "\"", close = true, newline = false, not_in = ["string"] },
+    { start = "'", end = "'", close = true, newline = false, not_in = ["string", "comment"] },
+    { start = "/*", end = " */", close = true, newline = false, not_in = ["string", "comment"] },
+]
+block_comment = { start = "/*", prefix = "", end = "*/", tab_size = 0 }
+documentation_comment = { start = "/**", prefix = "* ", end = "*/", tab_size = 1 }

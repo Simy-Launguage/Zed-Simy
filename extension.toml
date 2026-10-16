@@ -1,0 +1,11 @@
+id = "simy"
+name = "Simy"
+version = "0.0.1"
+schema_version = 1
+authors = ["Neutriny <neutriny@yeah.net>"]
+description = "Provides Simy Highlighting"
+repository = "https://github.com/Neutriny/zed-simy"
+
+[grammars.simy]
+repository = "https://github.com/Neutriny/tree-sitter-simy"
+rev = "ae1a9eecfcaaed35addc8978e785ca7d062349ef"
