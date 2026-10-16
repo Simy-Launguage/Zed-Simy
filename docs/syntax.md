@@ -64,8 +64,8 @@ The character set is fixed to **ASCII**, and identifiers may not start with a di
   grammatical feature.
 
 ```simy
-let _ = compute();        // discard the return value
-let _cache = 1;           // lint convention: marked unused, still an ordinary variable
+let _ = compute()        // discard the return value
+let _cache = 1           // lint convention: marked unused, still an ordinary variable
 ```
 
 ### 2.3 Keywords and reserved words
@@ -103,10 +103,10 @@ There is no need to declare a keyword per command.
 ## 3. Variables and mutability
 
 ```simy
-let damage = 10;                        // immutable (default, no prefix)
-let mut timer = 0;                      // mutable (mut prefix, immediately visible)
-let target: entity = @e[type=creeper];  // type after name, omittable when inferable
-const MAX_HEALTH = 20;                  // compile-time constant, inlined, no scoreboard
+let damage = 10                        // immutable (default, no prefix)
+let mut timer = 0                      // mutable (mut prefix, immediately visible)
+let target: entity = @e[type=creeper]  // type after name, omittable when inferable
+const MAX_HEALTH = 20                  // compile-time constant, inlined, no scoreboard
 ```
 
 **Mutability ratio strategy**: roughly 80% immutable (configuration, intermediate values)
@@ -127,7 +127,7 @@ and declare where they are stored.
 
 Types come in three layers: **primitive types**, **Minecraft domain types** (first-class)
 and **composite types**. All type names are **context-sensitive and not reserved** — they
-only take effect in type positions, so commands such as `tag @s add foo;` are unaffected.
+only take effect in type positions, so commands such as `tag @s add foo` are unaffected.
 
 ### 4.1 Primitive types
 
@@ -175,12 +175,12 @@ only take effect in type positions, so commands such as `tag @s add foo;` are un
 
 ### 4.4 Type inference
 
-- `let damage = 10;` is inferred as `num`.
+- `let damage = 10` is inferred as `num`.
 - Values crossing scoreboards default to `num`.
 - Complex structures going into `storage` need an explicit type annotation:
 
 ```simy
-let scores: map<str, num> = { "kills": 0, "deaths": 0 };
+let scores: map<str, num> = { "kills": 0, "deaths": 0 }
 ```
 
 ---
@@ -189,9 +189,9 @@ let scores: map<str, num> = { "kills": 0, "deaths": 0 };
 
 ```simy
 fn calculate_damage(attacker: entity, victim: entity) -> num {
-    let baseDamage = 5;
-    let damage = baseDamage * distance_multiplier(victim);
-    return damage;
+    let baseDamage = 5
+    let damage = baseDamage * distance_multiplier(victim)
+    return damage
 }
 ```
 
@@ -210,22 +210,24 @@ Conditions are **bracket-free**; blocks are delimited by `{ }`:
 
 ```simy
 if counter >= 100 {
-    tellraw @a "combo reached!";
+    tellraw @a "combo reached!"
 } else if counter >= 50 {
-    tellraw @a "keep it up";
+    tellraw @a "keep it up"
 } else {
-    tellraw @a "keep going";
+    tellraw @a "keep going"
 }
 ```
 
-> `if`, `for`, `while`, `fn`, `execute` and bare blocks are **compound statements and need
-> no trailing `;`** (as in Rust).
+> Statements are **terminated by a newline** (Go-style): one statement per line, and a
+> statement never spans lines. `if`, `for`, `while`, `fn`, `execute` and bare blocks are
+> **compound statements** and need no terminator. The `else` keyword and an opening `{`
+> must stay on the same line as what precedes them.
 
 ### 6.2 `while`
 
 ```simy
 while timer > 0 {
-    timer -= 1;
+    timer -= 1
 }
 ```
 
@@ -233,7 +235,7 @@ while timer > 0 {
 
 ```simy
 for player in @a[gamemode=adventure] {
-    effect give $player minecraft:glowing 1 1;
+    effect give $player minecraft:glowing 1 1
 }
 ```
 
@@ -242,9 +244,9 @@ for player in @a[gamemode=adventure] {
 ```simy
 fn pick(value: num) -> num {
     if value < 0 {
-        return 0;
+        return 0
     }
-    return value;
+    return value
 }
 ```
 
@@ -259,7 +261,7 @@ Structured scopes replace native `execute` nesting. The scope target is written 
 
 ```simy
 execute at <@a> {
-    particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10;
+    particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10
 }
 ```
 
@@ -273,12 +275,12 @@ execute at <@a> {
 ### 7.1 Command statements
 
 A command statement consists of a **command head** (any identifier) and **several
-structured atoms**, terminated by `;`:
+structured atoms**, terminated by a newline:
 
 ```simy
-effect give $player minecraft:glowing 1 1;
-tp $player ~ ~1 ~;
-tellraw @s "combo x$comboCount!";
+effect give $player minecraft:glowing 1 1
+tp $player ~ ~1 ~
+tellraw @s "combo x$comboCount!"
 ```
 
 - The command head is **not reserved**; any identifier can be a command name (including
@@ -286,7 +288,7 @@ tellraw @s "combo x$comboCount!";
 - Arguments may end with an optional named-argument block: `(key: value, …)`.
 
 ```simy
-tellraw @s "combo x$comboCount!" (color: "red");
+tellraw @s "combo x$comboCount!" (color: "red")
 ```
 
 - **Calls vs commands**: `foo(a)` is always a function call; `foo a b` is always a command.
@@ -333,7 +335,7 @@ minecraft:diamond_sword
 Whatever is inside `{ … }` is passed through verbatim:
 
 ```simy
-data merge block ~ ~ ~ { Health:10f };
+data merge block ~ ~ ~ { Health:10f }
 ```
 
 ---
@@ -345,8 +347,8 @@ data merge block ~ ~ ~ { Health:10f };
 Introduced by `$`, terminated naturally by whitespace:
 
 ```simy
-effect give $player minecraft:glowing 1 1;
-tp $player ~ ~1 ~;
+effect give $player minecraft:glowing 1 1
+tp $player ~ ~1 ~
 ```
 
 ### 8.2 String interpolation: two forms
@@ -357,17 +359,17 @@ tp $player ~ ~1 ~;
 | Braced form | `${ expr }` | The variable is immediately followed by a CJK character, or you need to embed an arbitrary expression |
 
 ```simy
-tellraw @s "combo x$comboCount!";          // short form: followed by punctuation, safe
-tellraw @s "current: ${comboCount}";        // braced: immediately followed by CJK
-tellraw @s "total: ${comboCount * 10}";     // braced: contains an arbitrary expression
-tellraw @s "${a}${b}${c}";                  // adjacent interpolations, unambiguous
+tellraw @s "combo x$comboCount!"          // short form: followed by punctuation, safe
+tellraw @s "current: ${comboCount}"        // braced: immediately followed by CJK
+tellraw @s "total: ${comboCount * 10}"     // braced: contains an arbitrary expression
+tellraw @s "${a}${b}${c}"                  // adjacent interpolations, unambiguous
 ```
 
 ### 8.3 Member access
 
 ```simy
-@s.score += 1;
-tellraw @a "HP: ${target.health}";
+@s.score += 1
+tellraw @a "HP: ${target.health}"
 ```
 
 ---
@@ -391,9 +393,9 @@ From highest to lowest precedence:
 **Assignment operators**: `=` `+=` `-=` `*=` `/=` `%=`
 
 ```simy
-let damage = base * 2;
-@s.score += 1;
-timer -= 1;
+let damage = base * 2
+@s.score += 1
+timer -= 1
 ```
 
 ---
@@ -405,11 +407,11 @@ A component bundles state (`scoreboard` / `tag`) with behavior (`tick`):
 ```simy
 component Spirit(name: str, effect: str) {
     tick(entity self) {
-        effect give $self $effect 1 1;
+        effect give $self $effect 1 1
     }
 }
 
-summon Spirit("Speed Spirit", "minecraft:speed");
+summon Spirit("Speed Spirit", "minecraft:speed")
 ```
 
 - Component names are **forced to CamelCase** (see §12).
@@ -424,10 +426,12 @@ summon Spirit("Speed Spirit", "minecraft:speed");
 
 | Statement type | Ending |
 | :--- | :--- |
-| `let` / `const` / assignment / expression / `return` / command | **Must end with `;`** |
-| `fn` / `component` / `if` / `for` / `while` / `execute` / bare `{ }` block | Compound statement, **no trailing `;`** |
+| `let` / `const` / assignment / expression / `return` / command | **Terminated by a newline** |
+| `fn` / `component` / `if` / `for` / `while` / `execute` / bare `{ }` block | Compound statement, **no terminator** |
 
-Scopes are delimited by `{ }`; declarations inside a nested block are visible only there.
+Blank lines are allowed between statements, and a line comment never needs a terminator of
+its own. Scopes are delimited by `{ }`; declarations inside a nested block are visible only
+there.
 
 ---
 
@@ -460,44 +464,44 @@ namespace.
 ## 13. Complete example
 
 ```simy
-const MAX_HEALTH = 20;
+const MAX_HEALTH = 20
 
 fn distance_multiplier(victim: entity) -> num {
-    return 2;
+    return 2
 }
 
 fn calculate_damage(attacker: entity, victim: entity) -> num {
-    let baseDamage = 5;
-    let damage = baseDamage * distance_multiplier(victim);
-    return damage;
+    let baseDamage = 5
+    let damage = baseDamage * distance_multiplier(victim)
+    return damage
 }
 
 fn tick_handler() {
     if counter >= 100 {
-        tellraw @a "combo reached!";
+        tellraw @a "combo reached!"
     } else {
-        tellraw @a "keep going";
+        tellraw @a "keep going"
     }
 
     for player in @a[gamemode=adventure] {
-        effect give $player minecraft:glowing 1 1;
+        effect give $player minecraft:glowing 1 1
     }
 
     execute at <@a> {
-        particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10;
+        particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10
     }
 }
 
 component Spirit(name: str, effect: str) {
     tick(entity self) {
-        effect give $self $effect 1 1;
+        effect give $self $effect 1 1
     }
 }
 
-summon Spirit("Speed Spirit", "minecraft:speed");
-@s.score += 1;
-tellraw @s "combo x$comboCount!" (color: "red");
-tellraw @s "total: ${comboCount * 10}";
+summon Spirit("Speed Spirit", "minecraft:speed")
+@s.score += 1
+tellraw @s "combo x$comboCount!" (color: "red")
+tellraw @s "total: ${comboCount * 10}"
 ```
 
 ---

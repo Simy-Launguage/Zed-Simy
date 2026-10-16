@@ -62,8 +62,8 @@
 - **`_` 前缀**（如 `_unused`）是允许的，属 **lint 级约定**，不改变语法。
 
 ```simy
-let _ = compute();        // 丢弃返回值
-let _cache = 1;           // lint 约定：标记未使用，语法上仍是普通变量
+let _ = compute()        // 丢弃返回值
+let _cache = 1           // lint 约定：标记未使用，语法上仍是普通变量
 ```
 
 ### 2.3 关键字与保留字
@@ -99,10 +99,10 @@ let  mut  const  fn  if  else  while  for  in  return  execute  at  component  t
 ## 3. 变量与可变性
 
 ```simy
-let damage = 10;                        // 不可变（默认，无前缀）
-let mut timer = 0;                      // 可变（mut 前缀，一眼可见）
-let target: entity = @e[type=creeper];  // 类型后置，可推断时省略
-const MAX_HEALTH = 20;                  // 编译期常量，直接内联，不占计分板
+let damage = 10                        // 不可变（默认，无前缀）
+let mut timer = 0                      // 可变（mut 前缀，一眼可见）
+let target: entity = @e[type=creeper]  // 类型后置，可推断时省略
+const MAX_HEALTH = 20                  // 编译期常量，直接内联，不占计分板
 ```
 
 **可变性比例策略**：不可变约 80%（配置、中间值），可变约 20%（计时器、游戏状态）。
@@ -121,7 +121,7 @@ const MAX_HEALTH = 20;                  // 编译期常量，直接内联，不�
 ## 4. 类型系统
 
 类型分三层：**基础类型**、**Minecraft 领域类型**（一等公民）、**复合类型**。
-所有类型名均**上下文识别、不保留**——它们只在类型位置生效，故 `tag @s add foo;` 等命令不受影响。
+所有类型名均**上下文识别、不保留**——它们只在类型位置生效，故 `tag @s add foo` 等命令不受影响。
 
 ### 4.1 基础类型
 
@@ -165,12 +165,12 @@ const MAX_HEALTH = 20;                  // 编译期常量，直接内联，不�
 
 ### 4.4 类型推断
 
-- `let damage = 10;` 自动推断为 `num`。
+- `let damage = 10` 自动推断为 `num`。
 - 跨 scoreboard 的值默认 `num`。
 - 进 `storage` 的复杂结构需要显式类型注解：
 
 ```simy
-let scores: map<str, num> = { "kills": 0, "deaths": 0 };
+let scores: map<str, num> = { "kills": 0, "deaths": 0 }
 ```
 
 ---
@@ -179,9 +179,9 @@ let scores: map<str, num> = { "kills": 0, "deaths": 0 };
 
 ```simy
 fn calculate_damage(attacker: entity, victim: entity) -> num {
-    let baseDamage = 5;
-    let damage = baseDamage * distance_multiplier(victim);
-    return damage;
+    let baseDamage = 5
+    let damage = baseDamage * distance_multiplier(victim)
+    return damage
 }
 ```
 
@@ -200,21 +200,22 @@ fn calculate_damage(attacker: entity, victim: entity) -> num {
 
 ```simy
 if counter >= 100 {
-    tellraw @a "连击达标！";
+    tellraw @a "连击达标！"
 } else if counter >= 50 {
-    tellraw @a "再接再厉";
+    tellraw @a "再接再厉"
 } else {
-    tellraw @a "继续加油";
+    tellraw @a "继续加油"
 }
 ```
 
-> `if`、`for`、`while`、`fn`、`execute`、裸块等**复合语句末尾不需要 `;`**（同 Rust）。
+> 语句以**换行结尾**（Go 风格）：一行一句，语句不跨行。`if`、`for`、`while`、`fn`、`execute`、
+> 裸块等是**复合语句**，无需终止符；`else` 关键字与左花括号 `{` 必须与前面内容同行。
 
 ### 6.2 `while`
 
 ```simy
 while timer > 0 {
-    timer -= 1;
+    timer -= 1
 }
 ```
 
@@ -222,7 +223,7 @@ while timer > 0 {
 
 ```simy
 for player in @a[gamemode=adventure] {
-    effect give $player minecraft:glowing 1 1;
+    effect give $player minecraft:glowing 1 1
 }
 ```
 
@@ -231,9 +232,9 @@ for player in @a[gamemode=adventure] {
 ```simy
 fn pick(value: num) -> num {
     if value < 0 {
-        return 0;
+        return 0
     }
-    return value;
+    return value
 }
 ```
 
@@ -246,7 +247,7 @@ fn pick(value: num) -> num {
 
 ```simy
 execute at <@a> {
-    particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10;
+    particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10
 }
 ```
 
@@ -259,19 +260,19 @@ execute at <@a> {
 
 ### 7.1 命令语句
 
-命令语句由**命令头**（任意标识符）与**若干结构化原子**组成，以 `;` 结束：
+命令语句由**命令头**（任意标识符）与**若干结构化原子**组成，以换行结束：
 
 ```simy
-effect give $player minecraft:glowing 1 1;
-tp $player ~ ~1 ~;
-tellraw @s "连击 x$comboCount!";
+effect give $player minecraft:glowing 1 1
+tp $player ~ ~1 ~
+tellraw @s "连击 x$comboCount!"
 ```
 
 - 命令头**不是保留字**，任何标识符都可作命令名（含 `summon`、`effect`、`particle`……）。
 - 参数可选的收尾命名参数块：`(key: value, …)`。
 
 ```simy
-tellraw @s "连击 x$comboCount!" (color: "red");
+tellraw @s "连击 x$comboCount!" (color: "red")
 ```
 
 - **区分调用与命令**：`foo(a)` 恒为函数调用；`foo a b` 恒为命令。
@@ -318,7 +319,7 @@ minecraft:diamond_sword
 `{ … }` 中的内容原样透传：
 
 ```simy
-data merge block ~ ~ ~ { Health:10f };
+data merge block ~ ~ ~ { Health:10f }
 ```
 
 ---
@@ -330,8 +331,8 @@ data merge block ~ ~ ~ { Health:10f };
 以 `$` 引导，靠空白自然截断：
 
 ```simy
-effect give $player minecraft:glowing 1 1;
-tp $player ~ ~1 ~;
+effect give $player minecraft:glowing 1 1
+tp $player ~ ~1 ~
 ```
 
 ### 8.2 字符串内插：两种形式
@@ -342,17 +343,17 @@ tp $player ~ ~1 ~;
 | 花括号 | `${ expr }` | 变量后紧跟 CJK 字符，或需要嵌入任意表达式 |
 
 ```simy
-tellraw @s "连击 x$comboCount!";          // 短形式：后面是标点，安全
-tellraw @s "当前连击：${comboCount}";      // 花括号：后面紧跟 CJK
-tellraw @s "总分：${comboCount * 10}";     // 花括号：内含任意表达式
-tellraw @s "${a}${b}${c}";                 // 相邻插值，无歧义
+tellraw @s "连击 x$comboCount!"          // 短形式：后面是标点，安全
+tellraw @s "当前连击：${comboCount}"      // 花括号：后面紧跟 CJK
+tellraw @s "总分：${comboCount * 10}"     // 花括号：内含任意表达式
+tellraw @s "${a}${b}${c}"                 // 相邻插值，无歧义
 ```
 
 ### 8.3 成员访问
 
 ```simy
-@s.score += 1;
-tellraw @a "HP: ${target.health}";
+@s.score += 1
+tellraw @a "HP: ${target.health}"
 ```
 
 ---
@@ -376,9 +377,9 @@ tellraw @a "HP: ${target.health}";
 **赋值运算符**：`=` `+=` `-=` `*=` `/=` `%=`
 
 ```simy
-let damage = base * 2;
-@s.score += 1;
-timer -= 1;
+let damage = base * 2
+@s.score += 1
+timer -= 1
 ```
 
 ---
@@ -390,11 +391,11 @@ timer -= 1;
 ```simy
 component Spirit(name: str, effect: str) {
     tick(entity self) {
-        effect give $self $effect 1 1;
+        effect give $self $effect 1 1
     }
 }
 
-summon Spirit("Speed Spirit", "minecraft:speed");
+summon Spirit("Speed Spirit", "minecraft:speed")
 ```
 
 - `component` 名**强制 CamelCase**（见 §12）。
@@ -407,10 +408,10 @@ summon Spirit("Speed Spirit", "minecraft:speed");
 
 | 语句类型 | 结尾 |
 | :--- | :--- |
-| `let` / `const` / 赋值 / 表达式 / `return` / 命令 | **必须以 `;` 结束** |
-| `fn` / `component` / `if` / `for` / `while` / `execute` / 裸 `{ }` 块 | 复合语句，**末尾免 `;`** |
+| `let` / `const` / 赋值 / 表达式 / `return` / 命令 | **以换行结尾** |
+| `fn` / `component` / `if` / `for` / `while` / `execute` / 裸 `{ }` 块 | 复合语句，**无需终止符** |
 
-作用域以 `{ }` 界定，嵌套块内声明仅在该块可见。
+语句之间允许空行，行注释本身也不需要终止符。作用域以 `{ }` 界定，嵌套块内声明仅在该块可见。
 
 ---
 
@@ -441,44 +442,44 @@ summon Spirit("Speed Spirit", "minecraft:speed");
 ## 13. 完整示例
 
 ```simy
-const MAX_HEALTH = 20;
+const MAX_HEALTH = 20
 
 fn distance_multiplier(victim: entity) -> num {
-    return 2;
+    return 2
 }
 
 fn calculate_damage(attacker: entity, victim: entity) -> num {
-    let baseDamage = 5;
-    let damage = baseDamage * distance_multiplier(victim);
-    return damage;
+    let baseDamage = 5
+    let damage = baseDamage * distance_multiplier(victim)
+    return damage
 }
 
 fn tick_handler() {
     if counter >= 100 {
-        tellraw @a "连击达标！";
+        tellraw @a "连击达标！"
     } else {
-        tellraw @a "继续加油";
+        tellraw @a "继续加油"
     }
 
     for player in @a[gamemode=adventure] {
-        effect give $player minecraft:glowing 1 1;
+        effect give $player minecraft:glowing 1 1
     }
 
     execute at <@a> {
-        particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10;
+        particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0.1 10
     }
 }
 
 component Spirit(name: str, effect: str) {
     tick(entity self) {
-        effect give $self $effect 1 1;
+        effect give $self $effect 1 1
     }
 }
 
-summon Spirit("Speed Spirit", "minecraft:speed");
-@s.score += 1;
-tellraw @s "连击 x$comboCount!" (color: "red");
-tellraw @s "总分：${comboCount * 10}";
+summon Spirit("Speed Spirit", "minecraft:speed")
+@s.score += 1
+tellraw @s "连击 x$comboCount!" (color: "red")
+tellraw @s "总分：${comboCount * 10}"
 ```
 
 ---

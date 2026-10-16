@@ -8,4 +8,4 @@ repository = "https://github.com/Neutriny/zed-simy"
 
 [grammars.simy]
 repository = "https://github.com/Neutriny/tree-sitter-simy"
-rev = "bcc6d90a54f83b727d8f60aa5158e4192a642e59"
+rev = "e8d200ea0b11b58fde0399453af97d16325a34b2"
