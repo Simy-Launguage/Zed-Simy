@@ -9,14 +9,14 @@ highlighting and editor integration queries. No language server yet.
 
 ## Features
 
-| Feature | Query |
-| :--- | :--- |
+| Feature             | Query                                             |
+| :------------------ | :------------------------------------------------ |
 | Syntax highlighting | [`highlights.scm`](languages/Simy/highlights.scm) |
-| Bracket matching | [`brackets.scm`](languages/Simy/brackets.scm) |
-| Auto-indentation | [`indents.scm`](languages/Simy/indents.scm) |
-| Code folding | [`folds.scm`](languages/Simy/folds.scm) |
-| Document outline | [`outline.scm`](languages/Simy/outline.scm) |
-| Local scopes | [`locals.scm`](languages/Simy/locals.scm) |
+| Bracket matching    | [`brackets.scm`](languages/Simy/brackets.scm)     |
+| Auto-indentation    | [`indents.scm`](languages/Simy/indents.scm)       |
+| Code folding        | [`folds.scm`](languages/Simy/folds.scm)           |
+| Document outline    | [`outline.scm`](languages/Simy/outline.scm)       |
+| Local scopes        | [`locals.scm`](languages/Simy/locals.scm)         |
 
 Simy keywords, Minecraft atoms (selectors, coordinates, namespaced IDs, block states, raw
 NBT), string interpolation and `$` references are all highlighted.
@@ -49,7 +49,7 @@ Zed will build the extension and compile the grammar referenced in `extension.to
 ```toml
 # extension.toml
 [grammars.simy]
-repository = "https://github.com/Neutriny/tree-sitter-simy"
+repository = "https://github.com/Simy-Launguage/tree-sitter-simy"
 rev = "bcc6d90a54f83b727d8f60aa5158e4192a642e59"
 ```
 
@@ -64,17 +64,17 @@ with `path_suffixes = ["simy"]`, so files ending in `.simy` use this language.
 
 The language reference lives in [`docs/`](docs/):
 
-| File | Language |
-| :--- | :--- |
-| [`docs/syntax.md`](docs/syntax.md) | English |
+| File                                           | Language |
+| :--------------------------------------------- | :------- |
+| [`docs/syntax.md`](docs/syntax.md)             | English  |
 | [`docs/syntax.zh-CN.md`](docs/syntax.zh-CN.md) | 简体中文 |
 
 ## Related projects
 
-| Repository | Role |
-| :--- | :--- |
-| **[simy](https://github.com/Neutriny/Simy)** | Compiler and CLI |
-| **[tree-sitter-simy](https://github.com/Neutriny/tree-sitter-simy)** | Tree-sitter grammar |
+| Repository                                                                 | Role                |
+| :------------------------------------------------------------------------- | :------------------ |
+| **[simy](https://github.com/Simy-Launguage/Simy)**                         | Compiler and CLI    |
+| **[tree-sitter-simy](https://github.com/Simy-Launguage/tree-sitter-simy)** | Tree-sitter grammar |
 
 ## Publishing
 
