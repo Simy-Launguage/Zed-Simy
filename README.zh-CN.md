@@ -71,7 +71,7 @@ rev = "bcc6d90a54f83b727d8f60aa5158e4192a642e59"
 
 | 仓库 | 作用 |
 | :--- | :--- |
-| **[simy](https://github.com/Neutriny/simy)** | 编译器与 CLI |
+| **[simy](https://github.com/Neutriny/Simy)** | 编译器与 CLI |
 | **[tree-sitter-simy](https://github.com/Neutriny/tree-sitter-simy)** | Tree-sitter 语法 |
 
 ## 发布

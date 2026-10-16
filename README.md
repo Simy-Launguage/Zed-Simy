@@ -73,7 +73,7 @@ The language reference lives in [`docs/`](docs/):
 
 | Repository | Role |
 | :--- | :--- |
-| **[simy](https://github.com/Neutriny/simy)** | Compiler and CLI |
+| **[simy](https://github.com/Neutriny/Simy)** | Compiler and CLI |
 | **[tree-sitter-simy](https://github.com/Neutriny/tree-sitter-simy)** | Tree-sitter grammar |
 
 ## Publishing
