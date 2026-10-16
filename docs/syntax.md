@@ -218,10 +218,13 @@ if counter >= 100 {
 }
 ```
 
-> Statements are **terminated by a newline** (Go-style): one statement per line, and a
-> statement never spans lines. `if`, `for`, `while`, `fn`, `execute` and bare blocks are
-> **compound statements** and need no terminator. The `else` keyword and an opening `{`
-> must stay on the same line as what precedes them.
+> Statements are **terminated by a newline** (Go-style): one statement per line. `if`,
+> `for`, `while`, `fn`, `execute` and bare blocks are **compound statements** and need no
+> terminator. The `else` keyword and an opening `{` must stay on the same line as what
+> precedes them.
+>
+> Newlines are **ignored inside `()`, `[]`, `<>` and `{}`** (implicit line joining), so
+> argument lists, parameter lists and selector arguments can span multiple lines.
 
 ### 6.2 `while`
 
@@ -430,8 +433,9 @@ summon Spirit("Speed Spirit", "minecraft:speed")
 | `fn` / `component` / `if` / `for` / `while` / `execute` / bare `{ }` block | Compound statement, **no terminator** |
 
 Blank lines are allowed between statements, and a line comment never needs a terminator of
-its own. Scopes are delimited by `{ }`; declarations inside a nested block are visible only
-there.
+its own. Newlines inside `( )`, `[ ]`, `< >` and `{ }` are ignored (implicit line joining),
+so lists and arguments can wrap across lines. Scopes are delimited by `{ }`; declarations
+inside a nested block are visible only there.
 
 ---
 
