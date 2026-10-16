@@ -5,7 +5,7 @@
 > Simy 是一门面向 **Minecraft 数据包开发** 的 DSL。表层采用现代语言工效学（Rust 风格），
 > 底层忠实映射 `scoreboard` / `NBT` / `execute` 的现实，编译目标为 `mcfunction` 与 JSON。
 >
-> 本文件描述 v0.1 语法规范（已冻结）。
+> 本文件描述 Simy 当前的语法规范（v0.1）。
 
 ---
 
@@ -280,8 +280,8 @@ tellraw @s "连击 x$comboCount!" (color: "red")
 - **区分调用与命令**：`foo(a)` 恒为函数调用；`foo a b` 恒为命令。
 
 ```
-calc_damage(victim);                  // 函数调用
-calc_damage victim;                   // 命令（头 calc_damage + 参数 victim）
+calc_damage(victim)                   // 函数调用
+calc_damage victim                    // 命令（头 calc_damage + 参数 victim）
 ```
 
 ### 7.2 选择器
@@ -414,6 +414,15 @@ summon Spirit("Speed Spirit", "minecraft:speed")
 | `fn` / `component` / `if` / `for` / `while` / `execute` / 裸 `{ }` 块 | 复合语句，**无需终止符** |
 
 语句之间允许空行，行注释本身也不需要终止符。`( )`、`[ ]`、`< >`、`{ }` 内的换行会被忽略（隐式续行），便于列表与参数跨行。作用域以 `{ }` 界定，嵌套块内声明仅在该块可见。
+
+```simy
+fn apply(
+    target: entity,
+    amount: num,
+) -> num {
+    return amount * 2
+}
+```
 
 ---
 

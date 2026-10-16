@@ -6,7 +6,7 @@
 > ergonomics (Rust-like) on the surface while faithfully mapping the reality of
 > `scoreboard` / `NBT` / `execute` underneath, compiling to `mcfunction` and JSON.
 >
-> This document describes the v0.1 grammar (frozen).
+> This document describes the current Simy grammar (v0.1).
 
 ---
 
@@ -297,8 +297,8 @@ tellraw @s "combo x$comboCount!" (color: "red")
 - **Calls vs commands**: `foo(a)` is always a function call; `foo a b` is always a command.
 
 ```
-calc_damage(victim);                  // function call
-calc_damage victim;                   // command (head calc_damage + argument victim)
+calc_damage(victim)                   // function call
+calc_damage victim                    // command (head calc_damage + argument victim)
 ```
 
 ### 7.2 Selectors
@@ -436,6 +436,15 @@ Blank lines are allowed between statements, and a line comment never needs a ter
 its own. Newlines inside `( )`, `[ ]`, `< >` and `{ }` are ignored (implicit line joining),
 so lists and arguments can wrap across lines. Scopes are delimited by `{ }`; declarations
 inside a nested block are visible only there.
+
+```simy
+fn apply(
+    target: entity,
+    amount: num,
+) -> num {
+    return amount * 2
+}
+```
 
 ---
 
