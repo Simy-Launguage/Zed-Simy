@@ -19,6 +19,7 @@
   "const"
   "fn"
   "if"
+  "elif"
   "else"
   "while"
   "for"
