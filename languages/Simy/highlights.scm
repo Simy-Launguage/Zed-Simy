@@ -3,6 +3,9 @@
 ; Order matters: general rules first, more specific ones later, so that later
 ; (more specific) captures win for the same node.
 
+; ─────────────────────────── default identifiers ─────────────────────────────
+(identifier) @variable
+
 ; ─────────────────────────────── comments ────────────────────────────────────
 (line_comment) @comment
 (block_comment) @comment
@@ -131,6 +134,3 @@
   "->"
   "="
 ] @operator
-
-; ─────────────────────────────── identifiers ─────────────────────────────────
-(identifier) @variable
