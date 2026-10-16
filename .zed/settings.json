@@ -1,11 +1,5 @@
 {
   "languages": {
-    "Slint": {
-      "tab_size": 4,
-      "formatter": "language_server",
-      "language_servers": ["slint-lsp"],
-      "format_on_save": "on",
-    },
     "Rust": {
       "tab_size": 4,
       "formatter": {

@@ -1,3 +1,0 @@
-[submodule "extensions/simy"]
-	path = extensions/simy
-	url = https://github.com/neutriny/zed-simy.git
