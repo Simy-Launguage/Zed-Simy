@@ -60,13 +60,21 @@ with `path_suffixes = ["simy"]`, so files ending in `.simy` use this language.
 > When you change query or config files, **rebuild the dev extension** — Zed reads them at
 > install time.
 
+## Documentation
+
+The language reference lives in [`docs/`](docs/):
+
+| File | Language |
+| :--- | :--- |
+| [`docs/syntax.md`](docs/syntax.md) | English |
+| [`docs/syntax.zh-CN.md`](docs/syntax.zh-CN.md) | 简体中文 |
+
 ## Related projects
 
 | Repository | Role |
 | :--- | :--- |
 | **[simy](https://github.com/Neutriny/simy)** | Compiler and CLI |
 | **[tree-sitter-simy](https://github.com/Neutriny/tree-sitter-simy)** | Tree-sitter grammar |
-| **[docs/syntax.md](docs/syntax.md)** | Language reference |
 
 ## Publishing
 

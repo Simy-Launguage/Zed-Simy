@@ -58,13 +58,21 @@ rev = "bcc6d90a54f83b727d8f60aa5158e4192a642e59"
 > 语法独立成仓，便于 Zed 之外的编辑器复用。修改查询或配置文件后请**重建开发扩展**——
 > Zed 只在安装时读取这些文件。
 
+## 文档
+
+语言参考位于 [`docs/`](docs/)：
+
+| 文件 | 语言 |
+| :--- | :--- |
+| [`docs/syntax.md`](docs/syntax.md) | English |
+| [`docs/syntax.zh-CN.md`](docs/syntax.zh-CN.md) | 简体中文 |
+
 ## 相关项目
 
 | 仓库 | 作用 |
 | :--- | :--- |
 | **[simy](https://github.com/Neutriny/simy)** | 编译器与 CLI |
 | **[tree-sitter-simy](https://github.com/Neutriny/tree-sitter-simy)** | Tree-sitter 语法 |
-| **[docs/syntax.zh-CN.md](docs/syntax.zh-CN.md)** | 语言参考 |
 
 ## 发布
 
